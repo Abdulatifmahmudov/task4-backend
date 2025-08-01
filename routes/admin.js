@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../models/db');
 const { verifyToken} = require('../middleware/authMiddleware');
-const isAdmin = require('./middleware/isAdmin');
+const isAdmin = require('../middleware/isAdmin');
 router.get('/admin/users', authenticateToken, isAdmin, getUsers);
 
 
