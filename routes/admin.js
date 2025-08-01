@@ -1,16 +1,16 @@
 const express = require('express');
 const pool = require('../models/db');
-const { verifyToken} = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/authMiddleware');
 const isAdmin = require('../middleware/isAdmin');
-router.get('/admin/users', authenticateToken, isAdmin, getUsers);
 
-
-const router = express.Router();
+const router = express.Router(); // ✅ Moved to the top
 
 // GET all users
 router.get('/users', verifyToken, isAdmin, async (req, res) => {
   try {
-    const result = await pool.query('SELECT id, name, email, role, status, created_at FROM users ORDER BY created_at DESC');
+    const result = await pool.query(
+      'SELECT id, name, email, role, status, created_at FROM users ORDER BY created_at DESC'
+    );
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
