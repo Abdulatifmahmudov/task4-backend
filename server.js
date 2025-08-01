@@ -10,10 +10,6 @@ const app = express(); // ✅ Define app before using it
 app.use(cors());
 app.use(express.json());
 
-if (user?.role !== 'admin') {
-  return <Navigate to="/login" />;
-}
-
 
 // Routes
 app.use('/api/auth', authRoutes);
